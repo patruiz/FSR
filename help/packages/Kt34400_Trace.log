@@ -1,0 +1,12 @@
+
+  Level     TimeStamp    DeltaTime    Message
+   Info -   0.000000 s        0 nS  Kt34400(USB0::0x2A8D::0x8E01::CN62180061::0::INSTR, true, true, QueryInstrStatus=True, Simulate=False, Trace=True)
+  Error -   0.013443 s     13.4 mS  Failed to open Resource manager
+   Info -   0.016571 s      3.1 mS  --- Kt34400.Close() ---
+   Info -   0.021114 s      4.5 mS  2024-04-29 00_46_43 - flush request
+
+  Level     TimeStamp    DeltaTime    Message
+   Info -   0.000000 s        0 nS  Kt34400(USB0::0x2A8D::0x8E01::CN62180061::0::INSTR, true, true, QueryInstrStatus=True, Simulate=False, Trace=True)
+  Error -   0.010569 s     10.6 mS  Failed to open Resource manager
+   Info -   0.012631 s      2.1 mS  --- Kt34400.Close() ---
+   Info -   0.016376 s      3.7 mS  2024-04-29 00_49_19 - flush request
