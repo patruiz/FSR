@@ -94,9 +94,9 @@ def calibration_continuous_curvefitting(FSR_dir, file_name, graph_title='Graph')
     print(residuals)
 
 
-# os.system('clear')
-os.system('cls')
-FSR_dir = 'FSR_TEST'
-file_name = 'Calibration Data 03May24 FSR-N1.csv'
-graph_title = 'FSR_S2 - Fuck My Ass - Soft'
+os.system('clear')
+# os.system('cls')
+FSR_dir = 'FSR_S2'
+file_name = 'FSR_S2_Calibration_PreCond_2.csv'
+graph_title = 'FSR_S2 - Calibration - PreCond - 2'
 calibration_continuous_curvefitting(FSR_dir, file_name, graph_title)

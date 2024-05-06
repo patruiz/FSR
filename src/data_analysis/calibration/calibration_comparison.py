@@ -6,9 +6,10 @@ def power_function(x, a, b):
     return a * np.power(x, b)
 
 data = {
-    'Pre-Cond': {'A': 17528.29506, 'A_SE': 109.56891, 'b': -1.01995, 'b_SE': 0.00342},
-    'Post-Cond': {'A': 12964.65478, 'A_SE': 82.63371, 'b': -0.90492, 'b_SE': 0.00344},
-    'Post-Stability': {'A': 62978.98873, 'A_SE': 367.64105, 'b': -1.45585, 'b_SE': 0.00332}
+    'Pre-Cond-1': {'A': 21806.88095, 'A_SE': 152.65029, 'b': -1.00784, 'b_SE': 0.00382},
+    'Post-Cond-1': {'A': 16350.46813, 'A_SE': 95.63404, 'b': -0.88515, 'b_SE': 0.00316},
+    'Pre-Cond-2': {'A': 26459.3715, 'A_SE': 119.01181, 'b': -1.06083, 'b_SE': 0.00247},
+    'Post-Cond-2': {'A': 21939.00353, 'A_SE': 245.64123, 'b': -0.99305, 'b_SE': 0.0061}
 }
 
 x_fit = np.linspace(4, 11, 100)
@@ -23,7 +24,7 @@ for event, params in data.items():
 
 ax.set_xlabel('Force (lbf)')
 ax.set_ylabel(r'Resistance ($\Omega$)')
-ax.set_title('FSR S2 - Comparison of Calibration Curves')
+ax.set_title('FSR S2 - Comparison of Calibration Curves - 2')
 ax.legend(loc='upper center', ncol=3)
 ax.grid(True)
 
