@@ -23,7 +23,7 @@ for event, params in data.items():
 
 ax.set_xlabel('Force (lbf)')
 ax.set_ylabel(r'Resistance ($\Omega$)')
-ax.set_title('FSR S1 - Comparison of Calibration Curves')
+ax.set_title('FSR S2 - Comparison of Calibration Curves')
 ax.legend(loc='upper center', ncol=3)
 ax.grid(True)
 
