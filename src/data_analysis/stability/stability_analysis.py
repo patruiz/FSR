@@ -3,7 +3,7 @@ import csv
 import numpy as np
 import pandas as pd 
 
-def power_func(x, A = 21643.96466, b = -1.08681):
+def power_func(x, A = 22121.19563, b = -0.9704):
     return A * np.power(x, b)
 
 def percenterror_func(acc, theo):
@@ -41,8 +41,8 @@ def stability_analysis(FSR_dir, file_name):
     os.remove(file_path)
     os.rename(temp_file_path, file_path)
 
-# os.system('clear')
-os.system('cls')
-FSR_dir = 'FSR_N1'
-file_name = 'FSR_N1_StabilityQuick(5.00lbf)' + '.csv'
+os.system('clear')
+# os.system('cls')
+FSR_dir = 'FSR_S3'
+file_name = 'FSR_S3_Stability_3' + '.csv'
 stability_analysis(FSR_dir, file_name)

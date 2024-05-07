@@ -17,9 +17,10 @@ def stability_graph(FSR_dir, file_name):
     print(f'Maximum Error: {np.max(np.abs(error_data))}')
     print(f'Minimum Error: {np.min(np.abs(error_data))}')
     print(f'Standard Deviation: {round(np.std(np.abs(error_data)), 4)}')
+    print(f'Length: {len(error_data)}')
     print('')
 
-    title = f'{FSR_dir} - Stability Error - JFF(5.00lbf)(Error < 20%)'
+    title = f'{FSR_dir} - Stability Error - 8.5 lbf - 3'
     plt.plot(error_data, 'bo--')
     plt.xlabel('Actuation #')
     plt.ylabel('Percent Error (%)')
@@ -28,6 +29,6 @@ def stability_graph(FSR_dir, file_name):
 
 # os.system('clear')
 os.system('cls')
-FSR_dir = 'FSR_N1'
-file_name = 'FSR_N1_Stability(5.00lbf)_Filtered' + '.csv'
+FSR_dir = 'FSR_S3'
+file_name = 'FSR_S3_Stability_3' + '.csv'
 stability_graph(FSR_dir, file_name)

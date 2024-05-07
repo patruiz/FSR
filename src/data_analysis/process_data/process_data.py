@@ -40,12 +40,12 @@ def process_data(FSR, file_name):
     new_df = pd.DataFrame(list(new_dict.values()), columns = ['Load (lbf)', 'Resistance (Ohms)'])
     new_df.to_csv(save_path, index = False)
 
-# os.system('clear')
-os.system('cls')
-FSR_dir = 'FSR_S2'
+os.system('clear')
+# os.system('cls')
+FSR_dir = 'FSR_S3'
 
 # Process one file at a time
-file_name = 'FSR_S2_Cond_1' + '.csv'
+file_name = 'FSR_S3_Calibration_PostStability_3' + '.csv'
 process_data(FSR_dir, file_name)
 
 # # Process multiple files at once
