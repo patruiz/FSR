@@ -42,10 +42,10 @@ def process_data(FSR, file_name):
 
 # os.system('clear')
 os.system('cls')
-FSR_dir = 'FSR_N1'
+FSR_dir = 'FSR_S2'
 
 # Process one file at a time
-file_name = 'FSR_N1_StabilityQuick(5.00lbf)' + '.csv'
+file_name = 'FSR_S2_Cond_1' + '.csv'
 process_data(FSR_dir, file_name)
 
 # # Process multiple files at once
