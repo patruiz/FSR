@@ -94,9 +94,9 @@ def calibration_continuous_curvefitting(FSR_dir, file_name, graph_title='Graph')
     print(residuals)
 
 
-os.system('clear')
-# os.system('cls')
+# os.system('clear')
+os.system('cls')
 FSR_dir = 'FSR_S2'
-file_name = 'FSR_S2_Calibration_PreCond_2.csv'
-graph_title = 'FSR_S2 - Calibration - PreCond - 2'
+file_name = 'FSR_S2_Calibration_PostStability_3.csv'
+graph_title = 'FSR_S2 - Calibration - PostStability - 3'
 calibration_continuous_curvefitting(FSR_dir, file_name, graph_title)
