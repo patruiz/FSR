@@ -20,7 +20,7 @@ def stability_graph(FSR_dir, file_name):
     print(f'Length: {len(error_data)}')
     print('')
 
-    title = f'{FSR_dir} - Stability Error - 8.5 lbf - 3'
+    title = f'{FSR_dir} - Stability Error - JFF(5.00lbf)(Error < 50)'
     plt.plot(error_data, 'bo--')
     plt.xlabel('Actuation #')
     plt.ylabel('Percent Error (%)')

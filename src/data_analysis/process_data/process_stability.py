@@ -46,10 +46,10 @@ def process_stability(FSR_dir, file_name, ref_force):
 
 os.system('clear')
 # os.system('cls')
-FSR_dir = 'FSR_S3'
+FSR_dir = 'FSR_N1'
 
 # Process one file at a time
-file_name = 'FSR_S3_Stability_2' + '.csv'
+file_name = 'FSR_N1_Stability(5.00lbf)' + '.csv'
 process_stability(FSR_dir, file_name, 1)
 
 # Process multiple files at once

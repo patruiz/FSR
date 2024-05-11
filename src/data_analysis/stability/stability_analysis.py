@@ -43,6 +43,6 @@ def stability_analysis(FSR_dir, file_name):
 
 os.system('clear')
 # os.system('cls')
-FSR_dir = 'FSR_S3'
-file_name = 'FSR_S3_Stability_3' + '.csv'
+FSR_dir = 'FSR_N1'
+file_name = 'FSR_N1_Stability(5.00lbf)' + '.csv'
 stability_analysis(FSR_dir, file_name)
