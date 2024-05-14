@@ -19,7 +19,8 @@ def power_function(x, a, b):
 
 def calibration_continuous_curvefitting(FSR_dir, file_name, graph_title='Graph'):
     # File and directory information
-    file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'calibration', file_name)
+    # file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'calibration', file_name)
+    file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'curve', file_name)
 
     # Read data from CSV file
     df = pd.read_csv(file_path, index_col=False)
@@ -94,9 +95,9 @@ def calibration_continuous_curvefitting(FSR_dir, file_name, graph_title='Graph')
     print(residuals)
 
 
-os.system('clear')
-# os.system('cls')
+# os.system('clear')
+os.system('cls')
 FSR_dir = 'FSR_S3'
-file_name = 'FSR_S3_Calibration_PostStability_3' + '.csv'
-graph_title = 'FSR_S3 - Calibration - PostStability - 3'
+file_name = 'FSR_S3_CalibrationTest_1' + '.csv'
+graph_title = 'FSR_S3 - Calibration Test - 1'
 calibration_continuous_curvefitting(FSR_dir, file_name, graph_title)

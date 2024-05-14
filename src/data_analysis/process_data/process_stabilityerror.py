@@ -6,7 +6,7 @@ from scipy.optimize import curve_fit
 
 def process_stability(FSR_dir, file_name, ref_force):
     file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'processed', file_name)
-    save_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'stability', file_name)
+    save_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'stability_error', file_name)
 
     df = pd.read_csv(file_path, index_col = None)
 

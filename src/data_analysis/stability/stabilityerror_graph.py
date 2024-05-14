@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def stability_graph(FSR_dir, file_name):
-    file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'stability', file_name)
+    file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'stability_error', file_name)
     
     df = pd.read_csv(file_path, index_col = False)
     
@@ -29,6 +29,6 @@ def stability_graph(FSR_dir, file_name):
 
 # os.system('clear')
 os.system('cls')
-FSR_dir = 'FSR_S3'
-file_name = 'FSR_S3_Stability_3' + '.csv'
+FSR_dir = 'FSR_S2'
+file_name = 'FSR_S2_Stability(5.00lbf)' + '.csv'
 stability_graph(FSR_dir, file_name)
