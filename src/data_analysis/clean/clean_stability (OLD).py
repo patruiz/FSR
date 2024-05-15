@@ -35,7 +35,7 @@ def process_stability(FSR_dir, file_name, ref_force):
                 diff = ref_force - j[0]
                 if diff < curr:
                     curr = diff
-                    diff = 0
+                    diff = 100
                     val = j
                 else:
                     pass
@@ -44,13 +44,18 @@ def process_stability(FSR_dir, file_name, ref_force):
     data_df = pd.DataFrame.from_dict(new_data, orient = 'index', columns = ['Force (lbf)', 'Resistance (Ohms)'])
     data_df.to_csv(save_path, index = False)
 
-os.system('clear')
-# os.system('cls')
-FSR_dir = 'FSR_N1'
+try:
+    os.system('clear')
+except Exception:
+    os.system('cls')
+    pass
+
+
+FSR_dir = 'FSR_S4'
 
 # Process one file at a time
-file_name = 'FSR_N1_Stability(5.00lbf)' + '.csv'
-process_stability(FSR_dir, file_name, 1)
+file_name = 'FSR_S4_5.50lbf' + '.csv'
+process_stability(FSR_dir, file_name, 5.50)
 
 # Process multiple files at once
 # file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'processed')
@@ -59,4 +64,3 @@ process_stability(FSR_dir, file_name, 1)
 
 # for file in sorted_files_list[1:]:
 #     process_stability(FSR_dir, file, 5)
-
