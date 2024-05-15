@@ -3,83 +3,77 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from scipy.stats import norm
+from scipy.stats import norm, linregress
 
-names = ["4.00", "4.25", "4.50", "4.75", "5.00", "5.25", "5.50", "5.75", "6.00", "6.25", "6.50", "6.75", "7.00", "7.25", "7.50", "7.75", "8.00", "8.25", "8.50", "8.75", "9.00"]
-
-# Clear the console
-try:
-    os.system("clear")
-except Exception:
-    os.system("cls")
-
-for i in names:
-    FSR_dir = "FSR_S4"
-    file_name = f"FSR_S4_{i}lbf"
-    full_filename = file_name + ".csv"
-    file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'stability_error', full_filename)
-
-    try:
-        df = pd.read_csv(file_path)
-    except FileNotFoundError:
-        print(f"File not found: {file_path}")
-        continue
-
-    ohms = np.array(df["Resistance (Ohms)"])
-
-    print("\n")
-    print(f"Force: {i}")
-    print(f"Sample Size: {len(ohms)}")
-    print(f"Max: {round(np.max(ohms))}")
-    print(f"Min: {round(np.min(ohms))}")
-    print(f"Range: {round(np.max(ohms) - np.min(ohms))}")
-
-    # Create a figure
-    plt.figure(figsize=(12, 6))
-
-    # Title for the entire figure
-    plt.suptitle(f"Force: {i}", fontsize=18, fontweight='bold', color='black')
-
-    # Histogram with curve fit
-    plt.subplot(1, 2, 1)
-    sns.histplot(ohms, kde=False, color='skyblue', bins=15, stat='density', edgecolor='black')
-    
-    mu, std = norm.fit(ohms)
+# Define a function to plot histograms with fitted normal curves
+def plot_histogram_with_fit(df, column, title, img_dir):
+    data = df[column]
+    plt.figure(figsize=(10, 6))
+    sns.histplot(data, kde=False, color='skyblue', bins=15, stat='density', edgecolor='black')
+    mu, std = norm.fit(data)
     xmin, xmax = plt.xlim()
     x = np.linspace(xmin, xmax, 100)
     p = norm.pdf(x, mu, std)
-    
     plt.plot(x, p, 'k', linewidth=2)
-    title = "Histogram and Normal Fit Curve"
-    plt.title(title, fontsize=14, fontweight='bold', color='black')
-    plt.xlabel('Resistance (Ohms)', fontsize=12)
+    plt.title(f"{title} - Histogram and Normal Fit Curve", fontsize=14, fontweight='bold')
+    plt.xlabel(column, fontsize=12)
     plt.ylabel('Density', fontsize=12)
+    plt.savefig(img_dir)
+    plt.close()
 
-    # Individual Values Chart
-    plt.subplot(2, 2, 2)
-    plt.plot(ohms, marker='o', linestyle='-', color='blue', label='Individual Values')
-    plt.xlabel('Sample Index', fontsize=12)
-    plt.ylabel('Resistance (Ohms)', fontsize=12)
-    plt.title('Individual Values Chart', fontsize=14, fontweight='bold', color='black')
+# Define a function to plot box plots
+def plot_boxplot(df, title, img_dir):
+    plt.figure(figsize=(10, 6))
+    sns.boxplot(data=df)
+    plt.title(title, fontsize=14, fontweight='bold')
+    plt.savefig(img_dir)
+    plt.close()
+
+# Define a function to plot scatter plots with trend lines
+def plot_scatter_with_trend(df, x, y, title, img_dir):
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(data=df, x=x, y=y)
+    slope, intercept, r_value, p_value, std_err = linregress(df[x], df[y])
+    plt.plot(df[x], intercept + slope*df[x], 'r', label=f'fit: slope={slope:.2f}, intercept={intercept:.2f}')
+    plt.title(title, fontsize=14, fontweight='bold')
+    plt.xlabel(x, fontsize=12)
+    plt.ylabel(y, fontsize=12)
+    plt.legend()
+    plt.savefig(img_dir)
+    plt.close()
+
+# Define a function to plot correlation heatmaps
+def plot_correlation_heatmap(df, title, img_dir):
+    plt.figure(figsize=(10, 8))
+    corr = df.corr()
+    sns.heatmap(corr, annot=True, cmap='coolwarm')
+    plt.title(title, fontsize=14, fontweight='bold')
+    plt.savefig(img_dir)
+    plt.close()
+
+# Define a function to plot standard deviation vs. stability force
+def plot_std_vs_force(df, x, y, title, img_dir):
+    std_dev = df.groupby(x)[y].std()
+    plt.figure(figsize=(10, 6))
+    std_dev.plot(marker='o', linestyle='-', color='blue')
+    plt.title(title, fontsize=14, fontweight='bold')
+    plt.xlabel('Stability Force (lbf)', fontsize=12)
+    plt.ylabel('Standard Deviation (Ohms)', fontsize=12)
+    plt.savefig(img_dir)
+    plt.close()
+
+# Main analysis function
+def stability_analyze(file_path, img_dir):
+    df = pd.read_csv(file_path)
     
-    # Calculate UCL and LCL for Individual Values
-    mr = np.abs(np.diff(ohms))
-    mr_average = np.mean(mr)
-    mr_std = np.std(mr)
-    ucl = ohms.mean() + 3 * mr_std
-    lcl = ohms.mean() - 3 * mr_std
-    plt.axhline(ucl, color='green', linestyle='--', label='UCL')
-    plt.axhline(lcl, color='red', linestyle='--', label='LCL')
-    plt.legend(fontsize=10, loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=3)
+    # Example usage of plot functions
+    plot_histogram_with_fit(df, 'Resistance (Ohms)', 'Resistance Distribution', os.path.join(img_dir, 'histogram.jpg'))
+    plot_boxplot(df[['Resistance (Ohms)', 'Max Resistance (Ohms)', 'Min Resistance (Ohms)']], 'Resistance Box Plot', os.path.join(img_dir, 'boxplot.jpg'))
+    plot_scatter_with_trend(df, 'Stability Force (lbf)', 'Resistance (Ohms)', 'Resistance vs. Force Scatter Plot', os.path.join(img_dir, 'scatter.jpg'))
+    plot_correlation_heatmap(df, 'Correlation Heatmap', os.path.join(img_dir, 'heatmap.jpg'))
+    plot_std_vs_force(df, 'Stability Force (lbf)', 'Resistance (Ohms)', 'Standard Deviation vs. Stability Force', os.path.join(img_dir, 'std_vs_force.jpg'))
 
-    # Moving Range Chart with Average
-    plt.subplot(2, 2, 4)
-    plt.plot(np.arange(1, len(mr) + 1), mr, marker='o', linestyle='-', color='red', label='Moving Range')
-    plt.axhline(mr_average, color='black', linestyle='--', label='Average')
-    plt.xlabel('Sample Index', fontsize=12)
-    plt.ylabel('Moving Range (Ohms)', fontsize=12)
-    plt.title('Moving Range Chart', fontsize=14, fontweight='bold', color='black')
-    plt.legend(fontsize=10, loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=2)
-
-    plt.tight_layout()
-    plt.show()
+# Example of calling stability_analyze with a path and directory
+file_path = "/Users/patrickruiz/Desktop/FSR/data/FSR_S4/stability/FSR_S4_6.50lbf.csv"
+img_dir = "/Users/patrickruiz/Desktop/FSR/data/FSR_S4/images/FSR_S4_6.50lbf"
+stability_analyze(file_path, img_dir)

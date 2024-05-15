@@ -4,7 +4,7 @@ import pandas as pd  # For data manipulation and analysis
 import matplotlib.pyplot as plt  # For plotting (though not used in the current code)
 from scipy.optimize import curve_fit  # For fitting curves to data (though not used in the current code)
 
-def process_stability(FSR_dir, file_name, ref_force):
+def clean_stability(FSR_dir, file_name, ref_force):
     """
     Process stability data from a CSV file, filter it based on a reference force,
     and save the processed data to a new CSV file.
@@ -16,7 +16,7 @@ def process_stability(FSR_dir, file_name, ref_force):
     """
     # Construct the file paths for reading the input file and saving the output file
     file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'processed', file_name)
-    save_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'stability_error', file_name)
+    save_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'stability', file_name)
 
     # Read the CSV file into a DataFrame
     df = pd.read_csv(file_path, index_col=None)
@@ -61,6 +61,8 @@ def process_stability(FSR_dir, file_name, ref_force):
 
     # Convert the processed data into a DataFrame and save it as a CSV file
     data_df = pd.DataFrame.from_dict(new_data, orient='index', columns=['Force (lbf)', 'Resistance (Ohms)'])
+    data_df["Force (lbf)"] = round(data_df["Force (lbf)"], 3)
+    data_df["Resistance (Ohms)"] = round(data_df["Resistance (Ohms)"])
     data_df.to_csv(save_path, index=False)
 
 # Clear the console screen
@@ -74,8 +76,8 @@ except Exception:
 FSR_dir = 'FSR_S4'
 
 # Process one file at a time
-file_name = 'FSR_S4_9.00lbf.csv'
-process_stability(FSR_dir, file_name, 9.00)
+# file_name = 'FSR_S4_4.00lbf.csv'
+# process_stability(FSR_dir, file_name, 4.00)
 
 # Process multiple files at once (uncomment to use)
 # file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'processed')
@@ -84,3 +86,13 @@ process_stability(FSR_dir, file_name, 9.00)
 
 # for file in sorted_files_list[1:]:
 #     process_stability(FSR_dir, file, 5)
+
+#process FSR_S4 data
+names = ["4.00", "4.25", "4.50", "4.75", "5.00", "5.25", "5.50", "5.75", "6.00", "6.25", "6.50", "6.75", "7.00", "7.25", "7.50", "7.75", "8.00", "8.25", "8.50", "8.75", "9.00"]
+
+for i in names:
+    FSR_dir = "FSR_S4"
+    part_file_name = f"FSR_S4_{i}lbf"
+    file_name = part_file_name + ".csv"
+    clean_stability(FSR_dir, file_name, float(i))
+    

@@ -17,10 +17,10 @@ def power_function(x, a, b):
     """
     return a * np.power(x, b)
 
-def calibration_continuous_curvefitting(FSR_dir, file_name, graph_title='Graph'):
+def calibration_curvefitting(FSR_dir, file_name, graph_title='Graph'):
     # File and directory information
-    # file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'calibration', file_name)
-    file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'curve', file_name)
+    file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'calibration', file_name)
+    # file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'curve', file_name)
 
     # Read data from CSV file
     df = pd.read_csv(file_path, index_col=False)
@@ -59,13 +59,13 @@ def calibration_continuous_curvefitting(FSR_dir, file_name, graph_title='Graph')
     # Plotting
     fig = plt.figure(figsize=(11, 7))
     ax1 = fig.add_subplot(111)
-    lns1 = ax1.scatter(x_data, y_data, c='black', marker='.', label='Original Data')
+    lns1 = ax1.scatter(x_data, y_data, c='black', marker='o', label='Original Data')
     lns2 = ax1.errorbar(x_fit, y_fit, yerr=y_err, fmt='-o', c='blue', label='Fitted Curve')
     ax2 = ax1.twinx()
     lns3 = ax2.plot(x_fit, z_fit, c='orange', label='Conductance')
 
     # Add labels, title, legend, and grid
-    plt.xlabel('Force (lbf)')
+    ax1.set_xlabel('Force (lbf)')
     ax1.set_ylabel(r'Resistance ($\Omega$)')
     ax2.set_ylabel(r'Conductance (S)')
     plt.title(graph_title)
@@ -94,10 +94,12 @@ def calibration_continuous_curvefitting(FSR_dir, file_name, graph_title='Graph')
     # np.set_printoptions(threshold=np.inf)
     print(residuals)
 
+try:
+    os.system('clear')
+except Exception:
+    os.system('cls')
 
-# os.system('clear')
-os.system('cls')
-FSR_dir = 'FSR_S3'
-file_name = 'FSR_S3_CalibrationTest_1' + '.csv'
-graph_title = 'FSR_S3 - Calibration Test - 1'
-calibration_continuous_curvefitting(FSR_dir, file_name, graph_title)
+FSR_dir = 'FSR_S4'
+file_name = 'FSR_S4_Calibration' + '.csv'
+graph_title = 'FSR_S4 - Calibration Curve'
+calibration_curvefitting(FSR_dir, file_name, graph_title)
