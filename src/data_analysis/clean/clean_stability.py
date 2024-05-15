@@ -74,8 +74,8 @@ except Exception:
 FSR_dir = 'FSR_S4'
 
 # Process one file at a time
-file_name = 'FSR_S4_7.25lbf.csv'
-process_stability(FSR_dir, file_name, 7.25)
+file_name = 'FSR_S4_9.00lbf.csv'
+process_stability(FSR_dir, file_name, 9.00)
 
 # Process multiple files at once (uncomment to use)
 # file_path = os.path.join(os.getcwd(), 'data', FSR_dir, 'processed')
