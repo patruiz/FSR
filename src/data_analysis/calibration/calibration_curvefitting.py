@@ -100,6 +100,6 @@ except Exception:
     os.system('cls')
 
 FSR_dir = 'FSR_S4'
-file_name = 'FSR_S4_Calibration' + '.csv'
-graph_title = 'FSR_S4 - Calibration Curve'
+file_name = 'FSR_S4_Calibration_2ndDayEnd' + '.csv'
+graph_title = 'FSR_S4 - Calibration Curve - 2nd Day End'
 calibration_curvefitting(FSR_dir, file_name, graph_title)
